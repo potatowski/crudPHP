@@ -1,0 +1,26 @@
+CREATE DATABASE desafio;
+
+CREATE TABLE IF NOT EXISTS desafio.Clientes (
+  CPF CHAR(11) NOT NULL,
+  nome VARCHAR(45) NULL,
+  nascimento DATE NULL,
+  PRIMARY KEY (CPF));
+
+CREATE TABLE IF NOT EXISTS desafio.Operadoras (
+  nome VARCHAR(45) NOT NULL,
+  PRIMARY KEY (nome));
+
+CREATE TABLE IF NOT EXISTS desafio.Telefones (
+  ddd INT(2) NOT NULL,
+  numero INT(2) NOT NULL,
+  Clientes_CPF CHAR(11) NOT NULL,
+  Operadora_nome VARCHAR(45) NOT NULL,
+  PRIMARY KEY (ddd,numero, Clientes_CPF, Operadora_nome),
+  CONSTRAINT fk_Cliente
+    FOREIGN KEY (Clientes_CPF)
+    REFERENCES desafio.Clientes (CPF),
+  CONSTRAINT fk_Operadora
+    FOREIGN KEY (Operadora_nome)
+    REFERENCES desafio.Operadoras(nome);
+
+  INSERT INTO operadoras (nome) VALUES ('VIVO'), ('TIM'),('CLARO'),('OI'),('NEXTEL');
